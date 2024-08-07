@@ -1,0 +1,31 @@
+@import "../../mixins";
+
+@include pc-only() {
+    .img {
+        height: min-content;
+        max-width: 27em;
+    }
+
+    .button {
+        margin: auto;
+        width: 22em;
+    }
+}
+
+@include tab() {
+    .img {
+        max-width: 24em;
+        height: min-content;
+    }
+
+    .button {
+        margin: auto;
+        width: 22em;
+    }
+}
+
+@include mob-mid() {
+    .img {
+        max-width: 20em;
+    }
+}

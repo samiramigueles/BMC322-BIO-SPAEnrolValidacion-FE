@@ -1,0 +1,27 @@
+.section {
+    display: flex;
+    flex-wrap: wrap;
+    height: 80%;
+    justify-content: center;
+    margin-top: 4em;
+
+    .img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .button {
+        align-items: center;
+        display: flex;
+        justify-content: flex-start;
+        height: min-content;
+        padding: 0.3em 0.4em;
+        width: 14em;
+
+        .buttonImage {
+            height: auto;
+            margin-right: 1.5em;
+            width: 13%;
+        }
+    }
+}

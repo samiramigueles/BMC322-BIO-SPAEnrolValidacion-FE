@@ -1,0 +1,64 @@
+@import "../../mixins";
+
+.containerCircularProgress {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+    height: 30%;
+    position: absolute;
+    top: 300px;
+
+    video {
+        height: 100%;
+        z-index: -1;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    div[data-test-id=CircularProgressbarWithChildren__children] {
+        overflow: hidden;
+        border-radius: 50%;
+        height: 93% !important;
+        width: 92% !important;
+        margin-top: -98% !important;
+        left: 11px;
+        z-index: 0;
+
+        @include mob-large() {
+            height: 91% !important;
+        }
+
+        @include pc-large() {
+            height: 94% !important;
+            left: 15px;
+        }
+
+
+    }
+
+    div[data-test-id=CircularProgressbarWithChildren] {
+
+        div {
+            svg {
+                position: relative;
+                z-index: 1000;
+            }
+        }
+    }
+
+
+    @include mob-large() {
+        display: flex;
+        justify-content: center;
+        width: 90%;
+        height: 90%;
+        position: static;
+        top: 0;
+    }
+
+    @include pc-large() {
+        top: 400px;
+    }
+
+}

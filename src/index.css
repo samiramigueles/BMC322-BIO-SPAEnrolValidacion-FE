@@ -1,0 +1,14 @@
+@import "../public/assets/fonts/fonts.css";
+body,
+html {
+    margin: 0;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: Open Sans;
+}
+.react-card-back,
+.react-card-front {
+    display: flex;
+    justify-content: center;
+}

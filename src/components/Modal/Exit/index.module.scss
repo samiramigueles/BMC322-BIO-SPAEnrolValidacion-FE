@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import "../../../mixins";
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20em;
+
+    @include mob-large() {
+        padding: 1em;
+    }
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 270px;
+    width: 100%;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+}
+
+.button {
+    color: #1EACDE;
+    text-transform: capitalize;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}

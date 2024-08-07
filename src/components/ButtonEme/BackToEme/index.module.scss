@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import "../../../mixins";
+
+.Banco-Macro-ANCH-aval {
+    background-color: #003761;
+    bottom: calc(50vh - 30px);
+    right: calc(50vw - 98px);
+    outline: none;
+    cursor: pointer;
+    font-family: 'Source Sans Pro', sans-serif;
+    border: 0px;
+    border-radius: 60px;
+    height: 20px;
+    width: 100px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all ease .3s;
+    margin: 0px;
+    padding: 0px;
+    transform: all .3s ease-in-out;
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.20);
+}
+
+.Banco-Macro-ANCH-aval-svg {
+    display: inline-block;
+    margin: 8px 8px 8px 8px;
+    fill: #ffffff;
+}
+
+
+.img {
+    overflow: hidden;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    vertical-align: unset;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.text {
+    margin-left: 15px;
+    font-size: 0.8em;
+    font-family: 'Open Sans', sans-serif;
+    text-transform: initial;
+}

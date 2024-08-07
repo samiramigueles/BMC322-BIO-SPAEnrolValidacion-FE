@@ -1,0 +1,9 @@
+@import "../../../mixins";
+
+.container {
+    margin-bottom: 500px;
+
+    @include mob-large() {
+        margin-bottom: 0px;
+    }
+}

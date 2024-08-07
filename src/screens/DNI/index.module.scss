@@ -1,0 +1,10 @@
+@import "../../mixins";
+
+.section {
+    @include default-style-height;
+
+    .img {
+        max-width: 50%;
+        height: auto;
+    }
+}

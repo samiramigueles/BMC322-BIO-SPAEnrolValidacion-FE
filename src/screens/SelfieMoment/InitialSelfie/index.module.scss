@@ -1,0 +1,65 @@
+@import "../../../mixins";
+
+.section {
+    @include default-style-height;
+
+    .description {
+        margin: auto;
+        width: 17em;
+        word-wrap: break-word;
+    }
+
+    .img {
+        object-fit: fill;
+        height: 100px;
+        width: 100px;
+    }
+
+    .imgFaceMark {
+        object-fit: fill;
+        height: 75px;
+        width: 100px;
+    }
+
+    .imgAccesories {
+        object-fit: fill;
+        height: 100px;
+        width: 100px;
+    }
+
+    @include pc-only() {
+        .img {
+            height: min-content;
+            max-width: 27em;
+        }
+
+        .button {
+            margin: auto;
+            width: 22em;
+        }
+    }
+
+    @include tab() {
+        .button {
+            margin: auto;
+            width: 18em;
+        }
+    }
+
+    @include mob-large() {
+        .img {
+            height: 100px;
+            width: 100px;
+        }
+
+        .imgFaceMark {
+            height: 70px;
+            width: 210px;
+        }
+
+        .imgAccesories {
+            height: 100px;
+            width: 100px;
+        }
+    }
+}

@@ -1,0 +1,45 @@
+@import "../../mixins";
+
+@include pc-only() {
+    .imgLogo {
+        max-width: 15em;
+        height: auto;
+    }
+
+    .imgIcon {
+        max-width: 8em;
+        height: auto;
+    }
+}
+
+@include tab() {
+    .imgLogo {
+        max-width: 15em;
+        height: auto;
+    }
+
+    .imgIcon {
+        max-width: 8em;
+        height: auto;
+    }
+}
+
+@include mob-large() {
+    .imgLogo {
+        max-width: 45%;
+    }
+
+    .imgIcon {
+        max-width: 25%;
+    }
+}
+
+@include mob-mid() {
+    .imgLogo {
+        max-width: 50%;
+    }
+
+    .imgIcon {
+        max-width: 30%;
+    }
+}

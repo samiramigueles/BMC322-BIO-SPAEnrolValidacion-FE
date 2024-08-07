@@ -1,0 +1,11 @@
+export const validationStep = {
+    WELCOME: "WELCOME",
+    DNI: "DNI",
+    FRENTE_DNI: "FRENTE_DNI",
+    DORSO_DNI: "DORSO_DNI",
+    SELFIE: "SELFIE",
+    TAKE_SELFIE: "TAKE_SELFIE",
+    VALIDATING: "VALIDATING",
+    VALIDATED: "VALIDATED",
+    ERROR: "ERROR",
+};

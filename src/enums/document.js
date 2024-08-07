@@ -1,0 +1,8 @@
+export const ID_CARD = "ID CARD";
+export const DRIVERS_LICENCE = "DRIVERS LICENCE";
+export const ID_CARD_RATIO = 1.58;
+export const CANVAS_DOCUMENT_PASSED = "#66CB9F";
+export const CANVAS_DOCUMENT_FOUND = "#FAC109";
+export const CANVAS_DOCUMENT_NOT_FOUND = "#F16063";
+export const DEFAULT_CAMERA_RESOLUTION = "1920x1080";
+export const NUMERO_DE_PASOS_DE_LA_CAPTURA = 2;
