@@ -1,5 +1,5 @@
-import React, { useRef, useContext, useState, useEffect } from "react";
-import { GlobalContext } from "../../Context";
+import React, { useRef, useState, useEffect } from "react";
+import { useGlobalContext } from "../../Context";
 import { validationStep } from "../../utils/validationSteps";
 import classes from "./index.module.scss";
 import { CheckMicroblink } from "../../../public/assets";
@@ -9,7 +9,7 @@ import {
     CANVAS_DOCUMENT_NOT_FOUND,
     CANVAS_DOCUMENT_PASSED,
     ID_CARD_RATIO,
-    NUMERO_DE_PASOS_DE_LA_CAPTURA
+    NUMERO_DE_PASOS_DE_LA_CAPTURA,
 } from "../../enums/document";
 import { FALSE } from "sass";
 import { Button } from "@mui/material";
@@ -19,10 +19,10 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
 
-    const { setFrontDni, setBackDni } = useContext(GlobalContext);
+    const { setFrontDni, setBackDni } = useGlobalContext();
 
     const [feedbackMsg, setFeedbackMessage] = useState("Cargando...");
-    const [dniSuccess, setDniSuccess] = useState(false)
+    const [dniSuccess, setDniSuccess] = useState(false);
     const [isWasmLoaded, setWasmLoaded] = useState(false);
     const [cameraStarted, setCameraStarted] = useState(false);
 
@@ -30,7 +30,6 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
     const dc = useRef(null);
     const [errorMessage, setErrorMessage] = useState("");
     const [currentCaptureStep, setCurrentCaptureStep] = useState(1);
-
 
     let searchForDocumentTimeout = null;
     let loadDocModuleTimeout = null;
@@ -44,9 +43,7 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
                 clearInterval(timerId);
             }
         }, 1000);
-    }
-
-
+    };
 
     const createInstaceDc = () => {
         const { Daon } = window;
@@ -56,20 +53,16 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
             rejectLowResolutionCameras: true,
             facingMode: "environment",
             debugMode: false,
-        })
+        });
 
         loadDocModule();
         startCamera();
-
-    }
+    };
 
     const loadDocModule = () => {
         dc.current.loadWasmModules({
             urlIDDetectorWasm: window.location.origin + "/DaonIDCapture.wasm",
-            onIDModuleInited: ({
-                isLoaded,
-                error,
-            }) => {
+            onIDModuleInited: ({ isLoaded, error }) => {
                 setWasmLoaded(isLoaded);
                 if (error) {
                     loadDocModuleTimeout = setTimeout(() => {
@@ -84,12 +77,13 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
     const startCamera = () => {
         setErrorMessage("");
         setCanvasDimensions();
-        dc.current.startCamera({
-            targetVideo: videoRef.current,
-            overlayCanvas: canvasRef.current,
-            aspectRatio: ID_CARD_RATIO,
-            overlayBackground: "rgba(0,0,0,0.0)"
-        })
+        dc.current
+            .startCamera({
+                targetVideo: videoRef.current,
+                overlayCanvas: canvasRef.current,
+                aspectRatio: ID_CARD_RATIO,
+                overlayBackground: "rgba(0,0,0,0.0)",
+            })
             .then(() => {
                 setCameraStarted(true);
             })
@@ -99,9 +93,8 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
     };
 
     const setCanvasDimensions = () => {
-        const { clientWidth, clientHeight } = document.querySelector(
-            "#video-container"
-        );
+        const { clientWidth, clientHeight } =
+            document.querySelector("#video-container");
         if (videoRef.current) {
             videoRef.current.width = clientWidth;
             videoRef.current.height = clientHeight;
@@ -124,16 +117,14 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
                     dc.current.searchForDocument(ID_CARD_RATIO);
                 }
             },
-            onIDDetectorError: (
-                coordinates,
-                err,
-                qualityScore
-            ) => {
-
+            onIDDetectorError: (coordinates, err, qualityScore) => {
                 switch (err.code) {
                     case 900: {
                         setFeedbackMessage("Escaneando...");
-                        dc.current.setStrokeStyle(CANVAS_DOCUMENT_PASSED, ID_CARD_RATIO,);
+                        dc.current.setStrokeStyle(
+                            CANVAS_DOCUMENT_PASSED,
+                            ID_CARD_RATIO
+                        );
                         break;
                     }
 
@@ -144,7 +135,10 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
                             setFeedbackMessage("Acercá el dorso de tu DNI");
                         }
 
-                        dc.current.setStrokeStyle(CANVAS_DOCUMENT_NOT_FOUND, ID_CARD_RATIO);
+                        dc.current.setStrokeStyle(
+                            CANVAS_DOCUMENT_NOT_FOUND,
+                            ID_CARD_RATIO
+                        );
                         break;
                     }
                     default: {
@@ -153,11 +147,13 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
                         } else if (step === validationStep.DORSO_DNI) {
                             setFeedbackMessage("Acercá el dorso de tu DNI");
                         }
-                        dc.current.setStrokeStyle(CANVAS_DOCUMENT_FOUND, ID_CARD_RATIO);
+                        dc.current.setStrokeStyle(
+                            CANVAS_DOCUMENT_FOUND,
+                            ID_CARD_RATIO
+                        );
                         break;
                     }
-                };
-
+                }
 
                 searchForDocumentTimeout = setTimeout(() => {
                     dc.current.searchForDocument(ID_CARD_RATIO);
@@ -169,50 +165,48 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
                 qualityScore,
                 unprocessedImage
             ) => {
-
                 let documentImages = {};
                 if (unprocessedImage) {
                     documentImages = { unprocessedImage };
                 }
                 if (documentImage && documentImage !== "data:") {
-
                     if (step === validationStep.FRENTE_DNI) {
-                        documentImages = { ...documentImages, frontDni: documentImage };
+                        documentImages = {
+                            ...documentImages,
+                            frontDni: documentImage,
+                        };
                         ReactGA.event({
                             category: "Captura",
                             action: "enr_captura_dni_frente",
-                            value: timer
-                        })
+                            value: timer,
+                        });
                         setFrontDni(documentImage);
                     } else if (step === validationStep.DORSO_DNI) {
-                        documentImages = { ...documentImages, backDni: documentImage };
+                        documentImages = {
+                            ...documentImages,
+                            backDni: documentImage,
+                        };
                         ReactGA.event({
                             category: "Captura",
                             action: "enr_captura_dni_dorso",
-                            value: timer
-                        })
-                        setBackDni(documentImage)
+                            value: timer,
+                        });
+                        setBackDni(documentImage);
                     }
-
 
                     // LA FOTO SE SACO SATIFACTORIAMENTE
                     // Actualizar el paso actual de la captura
-
 
                     if (step === validationStep.FRENTE_DNI) {
                         setDniSuccess(true);
                     } else if (step === validationStep.DORSO_DNI) {
                         setStep(validationStep.SELFIE);
                     }
-
                 } else {
                     searchForDocumentTimeout = setTimeout(() => {
                         dc.current.searchForDocument(ID_CARD_RATIO);
                     }, 500);
                 }
-
-
-
             },
             nPassedFrames: 5,
             downloadFrames: false,
@@ -222,18 +216,17 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
     useEffect(() => {
         console.log("Esto es timer", timer);
         if (timer >= 15) {
-            console.log("Llego a 15")
+            console.log("Llego a 15");
             ReactGA.event({
                 category: "Reintento",
                 action: "enr_frente_reintentar",
-                value: timer
-            })
+                value: timer,
+            });
             setStep(validationStep.ERROR);
             setErrMsg(400);
             setTimer(0);
         }
     }, [timer]);
-
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -241,7 +234,8 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
         }
 
         return () => {
-            if (searchForDocumentTimeout) clearTimeout(searchForDocumentTimeout);
+            if (searchForDocumentTimeout)
+                clearTimeout(searchForDocumentTimeout);
             if (loadDocModuleTimeout) clearTimeout(loadDocModuleTimeout);
             if (startIdDetectorTimeout) clearTimeout(startIdDetectorTimeout);
             if (dc.current) {
@@ -261,19 +255,17 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
         ReactGA.event({
             category: "Button",
             action: "enr_inicio_dni_dorso",
-            value: timer
+            value: timer,
         });
-        setStep(validationStep.DORSO_DNI)
+        setStep(validationStep.DORSO_DNI);
         setCurrentCaptureStep((prevStep) => prevStep + 1);
         setDniSuccess(false);
-    }
-
+    };
 
     if (dniSuccess) {
         return (
             <>
-
-                <Image alt='check' src={CheckMicroblink} height={"50px"} />
+                <Image alt="check" src={CheckMicroblink} height={"50px"} />
 
                 <Button
                     color={"secondary"}
@@ -285,8 +277,7 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
                     Tomar dorso DNI
                 </Button>
             </>
-
-        )
+        );
     } else {
         return (
             <div className={classes["dni-screen-scanning"]}>
@@ -307,12 +298,13 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
                 ></canvas>
 
                 <p className={classes["camera-dni-guides"]}>
-                    <span style={{ background: "#24224F", fontSize: "0.8em" }}>{feedbackMsg}</span>
+                    <span style={{ background: "#24224F", fontSize: "0.8em" }}>
+                        {feedbackMsg}
+                    </span>
                 </p>
             </div>
-        )
+        );
     }
-
 }
 
 export default DocSdk;

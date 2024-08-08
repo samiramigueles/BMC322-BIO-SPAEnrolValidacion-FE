@@ -1,15 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { validationStep } from "../../utils/validationSteps";
-import { Welcome, InitialSelfie, TakeSelfie, ValidateIdentity, End, Error } from "../../screens/index";
-import Modal from "../../components/Modal/Exit/index"
-import Api from "@services/api/core"
-import { GlobalContext } from "Context";
+import { TakeSelfie, ValidateIdentity, Error } from "../../screens/index";
+import Modal from "../../components/Modal/Exit/index";
+import Api from "@services/api/core";
+import { useGlobalContext } from "Context";
 export async function getServerSideProps({ query }) {
-    const id = query.id
+    const id = query.id;
     let data = null;
     if (!id) {
-        console.log("--------------------No se encontro un query string id-------------")
+        console.log(
+            "--------------------No se encontro un query string id-------------"
+        );
         return {
             redirect: {
                 permanent: false,
@@ -28,7 +30,6 @@ export async function getServerSideProps({ query }) {
             body
         );
 
-
         if (!id || !data.elements[0]) {
             return {
                 redirect: {
@@ -39,12 +40,11 @@ export async function getServerSideProps({ query }) {
         }
 
         return {
-            props:
-            {
+            props: {
                 sessionid: id,
                 optionProcess: data.elements[0].TipoIdSPA,
-                idxId: data.elements[0].Id
-            }
+                idxId: data.elements[0].Id,
+            },
         };
     } catch (error) {
         console.error(error);
@@ -59,7 +59,7 @@ export async function getServerSideProps({ query }) {
 function ProcessRegistration({ optionProcess, idxId, sessionid }) {
     const [step, setStep] = useState(validationStep.TAKE_SELFIE);
     const [errMsg, setErrMsg] = useState(null);
-    const { setIdxId, setOptionProcess, setUIID } = useContext(GlobalContext);
+    const { setIdxId, setOptionProcess, setUIID } = useGlobalContext();
     useEffect(() => {
         setUIID(sessionid);
         setOptionProcess(optionProcess);
@@ -69,12 +69,17 @@ function ProcessRegistration({ optionProcess, idxId, sessionid }) {
     return (
         <>
             <Modal />
-            {step === validationStep.TAKE_SELFIE && <TakeSelfie setStep={setStep} />}
-            {step === validationStep.VALIDATING && <ValidateIdentity setStep={setStep} setErrMsg={setErrMsg} />}
-            {step === validationStep.ERROR && <Error errorMsg={errMsg} setStep={setStep} />}
+            {step === validationStep.TAKE_SELFIE && (
+                <TakeSelfie setStep={setStep} />
+            )}
+            {step === validationStep.VALIDATING && (
+                <ValidateIdentity setStep={setStep} setErrMsg={setErrMsg} />
+            )}
+            {step === validationStep.ERROR && (
+                <Error errorMsg={errMsg} setStep={setStep} />
+            )}
         </>
-
-    )
+    );
 }
 
 export default ProcessRegistration;

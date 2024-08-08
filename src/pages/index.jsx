@@ -1,17 +1,20 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
 import Head from "next/head";
 
-import { Intro, ErrorOnlyMobile } from "../screens";
+import { ErrorOnlyMobile } from "../screens";
 
-import { GlobalContext } from "../Context";
-import Api from "@services/api/core"
+const Intro = dynamic(() => import("../screens/Intro"), { ssr: false });
+
+import { useGlobalContext } from "../Context";
+import Api from "@services/api/core";
 import { emit } from "utils/events/events";
 export async function getServerSideProps({ query }) {
     const id = query.id;
     let data = null;
     if (!id) {
-        console.log("No se encontro un query string id")
+        console.log("No se encontro un query string id");
         return {
             redirect: {
                 permanent: false,
@@ -20,7 +23,7 @@ export async function getServerSideProps({ query }) {
         };
     }
     try {
-        console.log('Validando loginhint ', id);
+        console.log("Validando loginhint ", id);
         const body = {
             loginhint: id,
         };
@@ -31,9 +34,8 @@ export async function getServerSideProps({ query }) {
             body
         );
 
-
         if (!data.elements[0]) {
-            console.log('No existe un resultado desde ESB para loginhint ', id);
+            console.log("No existe un resultado desde ESB para loginhint ", id);
             return {
                 redirect: {
                     permanent: false,
@@ -42,18 +44,17 @@ export async function getServerSideProps({ query }) {
             };
         }
 
-        console.log('Validacion OK ', JSON.stringify(data));
+        console.log("Validacion OK ", JSON.stringify(data));
 
         return {
-            props:
-            {
+            props: {
                 sessionid: id,
                 optionProcess: data.elements[0].TipoIdSPA,
-                idxId: data.elements[0].Id
-            }
+                idxId: data.elements[0].Id,
+            },
         };
     } catch (error) {
-        console.error('Error en renderizado de pagina inicial ', error);
+        console.error("Error en renderizado de pagina inicial ", error);
         return {
             redirect: {
                 permanent: false,
@@ -64,31 +65,31 @@ export async function getServerSideProps({ query }) {
 }
 
 export default function Home({ optionProcess, idxId, error }) {
-    const { setOptionProcess, setIdxId } = useContext(GlobalContext);
+    const { setOptionProcess, setIdxId } = useGlobalContext();
     const [isMobile, setIsMobile] = useState(true);
 
     useEffect(() => {
         if (error) {
             emit("serverError", {
                 code: error.subcode,
-            })
+            });
         }
         sessionStorage.setItem("optionProcess", optionProcess);
         setOptionProcess(optionProcess);
         setIdxId(idxId);
         const userAgent = navigator.userAgent.toLowerCase();
-        const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+        const isMobile =
+            /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+                userAgent
+            );
 
         if (!isMobile) {
-            setIsMobile(false)
+            setIsMobile(false);
         }
-
     }, []);
 
     if (!isMobile) {
-        return (
-            <ErrorOnlyMobile />
-        )
+        return <ErrorOnlyMobile />;
     } else {
         return (
             <div>
@@ -99,6 +100,4 @@ export default function Home({ optionProcess, idxId, error }) {
             </div>
         );
     }
-
-
 }

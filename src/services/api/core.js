@@ -40,11 +40,11 @@ mocksResponse.forEach((mock) => {
 });
 
 // Determina si usar la instancia de mock o la definida en la variable de entorno HOSTNAME_BE
-const isAxioMock = false;
+const isAxioMock = true;
 
 class Api {
     properties = {
-        useEncoding: true, //determina si usar encriptacion, en desarrollo para mocks poner en false
+        useEncoding: false, //determina si usar encriptacion, en desarrollo para mocks poner en false
     };
 
     async call(path, method, data) {

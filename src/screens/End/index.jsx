@@ -7,35 +7,35 @@ import Layout from "../../components/Layout";
 import { EndIcon, EmeIconButton } from "../../../public/assets";
 
 import classes from "./index.module.scss";
-import { useContext } from "react";
-import { GlobalContext } from "../../Context";
+import { useGlobalContext } from "../../Context";
 import BackToEme from "../../components/ButtonEme/BackToEme";
 import ReactGA from "react-ga4";
 function End({ sessionid }) {
-    const { optionProcess } = useContext(GlobalContext);
+    const { optionProcess } = useGlobalContext();
     useEffect(() => {
-        const optionProcess = sessionStorage.getItem("optionProcess")
+        const optionProcess = sessionStorage.getItem("optionProcess");
         if (optionProcess === "E" || optionProcess === "W") {
             ReactGA.event({
-                category: 'Finalizacion',
-                action: 'enr_operacion_exitosa',
-                value: `operation_id: ${sessionid}`
+                category: "Finalizacion",
+                action: "enr_operacion_exitosa",
+                value: `operation_id: ${sessionid}`,
             });
         } else {
             ReactGA.event({
-                category: 'Finalizacion',
-                action: 'val_operacion_exitosa',
-                value: `operation_id: ${sessionid}`
+                category: "Finalizacion",
+                action: "val_operacion_exitosa",
+                value: `operation_id: ${sessionid}`,
             });
         }
-
-    }, [])
+    }, []);
     return (
         <Layout showExitButton={false}>
             <section className={classes.section}>
                 <Grid item xs={12} display={"flex"} justifyContent={"center"}>
                     <Typography variant="h1" color={"primary"} width={"60%"}>
-                        ¡Tu identidad fue {optionProcess === "E" ? "registrada" : "validada"} correctamente!
+                        ¡Tu identidad fue{" "}
+                        {optionProcess === "E" ? "registrada" : "validada"}{" "}
+                        correctamente!
                     </Typography>
                 </Grid>
 

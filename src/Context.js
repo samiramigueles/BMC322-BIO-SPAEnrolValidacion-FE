@@ -1,6 +1,18 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 export const GlobalContext = createContext();
+
+export const useGlobalContext = () => {
+    const context = useContext(GlobalContext);
+
+    if (!context) {
+        throw new Error(
+            "Error de contexto: useGlobalContext debe usarse dentro de un GlobalProvider"
+        );
+    }
+
+    return context;
+};
 
 export const GlobalProvider = ({ children }) => {
     const [userInfo, setUserInfo] = useState({});
