@@ -10,6 +10,7 @@ function ErrorGeneral({ errorMsg, setStep }) {
         }
         setStep(validationStep.SELFIE);
     };
+
     return (
         <LayoutErrorModal
             errMsg={errorMsg ? errorMsg : "Algo salió mal"}

@@ -66,7 +66,7 @@ export async function getServerSideProps({ query }) {
 
 export default function Home({ optionProcess, idxId, error }) {
     const { setOptionProcess, setIdxId } = useGlobalContext();
-    const [isMobile, setIsMobile] = useState(true);
+    const [isMobile, setIsMobile] = useState(null);
 
     useEffect(() => {
         if (error) {
@@ -78,14 +78,12 @@ export default function Home({ optionProcess, idxId, error }) {
         setOptionProcess(optionProcess);
         setIdxId(idxId);
         const userAgent = navigator.userAgent.toLowerCase();
-        const isMobile =
+        const isMobileDevice =
             /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
                 userAgent
             );
 
-        if (!isMobile) {
-            setIsMobile(false);
-        }
+        setIsMobile(isMobileDevice);
     }, []);
 
     if (!isMobile) {

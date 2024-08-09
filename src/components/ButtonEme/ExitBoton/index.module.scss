@@ -1,17 +1,14 @@
 @import "../../../mixins";
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 .backEme {
-    position: absolute;
+    color: #1eacde;
+    font-family: "Open Sans", sans-serif;
     font-size: 20px;
-    font-family: 'Open Sans', sans-serif;
-    color: #1EACDE;
     font-weight: bold;
-    top: -50px;
-    text-transform: capitalize;
+    position: absolute;
     text-decoration: underline;
+    text-transform: capitalize;
 
     @include mob-large() {
         top: -60px;

@@ -53,7 +53,7 @@ export default function ButtonEmme({ step }) {
         return;
     };
     return (
-        <Button onClick={() => handleClick()} className={classes["backEme"]}>
+        <Button onClick={() => handleClick()} className={classes.backEme}>
             Salir
         </Button>
     );
