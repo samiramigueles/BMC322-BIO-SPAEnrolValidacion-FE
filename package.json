@@ -51,7 +51,9 @@
         ]
     },
     "devDependencies": {
+        "@next/bundle-analyzer": "^14.2.5",
         "axios-mock-adapter": "^1.21.5",
-        "prettier": "^2.8.4"
+        "prettier": "^2.8.4",
+        "webpack-bundle-analyzer": "^4.10.2"
     }
 }

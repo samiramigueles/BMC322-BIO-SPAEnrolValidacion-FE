@@ -19,7 +19,6 @@ function Intro() {
                     optionProcessSession === "E" ||
                     optionProcessSession === "W"
                 ) {
-                    console.log("intro");
                     router.push(`/process-registration?id=${router.query.id}`);
                 } else if (optionProcessSession === "V") {
                     router.push(`/process-validation?id=${router.query.id}`);

@@ -8,7 +8,6 @@ export default function ButtonEmme({ step }) {
     const handleClick = () => {
         const optionProcess = sessionStorage.getItem("optionProcess");
         setOpenExitModal(true);
-        console.log("Esto es step", step);
         switch (step) {
             case validationStep.WELCOME:
                 {
