@@ -10,7 +10,6 @@ export const useGlobalContext = () => {
             "Error de contexto: useGlobalContext debe usarse dentro de un GlobalProvider"
         );
     }
-
     return context;
 };
 

@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import { Grid, Typography, Button } from "@mui/material";
 
 import Layout from "../../../components/Layout";
@@ -13,18 +12,15 @@ import {
 import { validationStep } from "../../../utils/validationSteps";
 
 import classes from "./index.module.scss";
-import { useState } from "react";
-import ReactGA from "react-ga4";
+import { trackEvent } from "utils/ga";
 function InitialSelfie({ setStep, step }) {
-
     const handleClick = () => {
-        ReactGA.event({
-            category: 'Button',
-            action: 'enr_inicio_selfe',
+        trackEvent({
+            category: "Button",
+            action: "enr_inicio_selfe",
         });
         setStep(validationStep.TAKE_SELFIE);
-    }
-
+    };
 
     return (
         <Layout step={step}>

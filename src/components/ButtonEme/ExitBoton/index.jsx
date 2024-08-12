@@ -3,6 +3,8 @@ import { Button } from "@mui/material";
 import { useGlobalContext } from "../../../Context";
 import { validationStep } from "utils/validationSteps";
 import ReactGA from "react-ga4";
+import { trackEvent } from "utils/ga";
+
 export default function ButtonEmme({ step }) {
     const { setOpenExitModal } = useGlobalContext();
     const handleClick = () => {
@@ -12,12 +14,12 @@ export default function ButtonEmme({ step }) {
             case validationStep.WELCOME:
                 {
                     if (optionProcess === "W") {
-                        ReactGA.event({
+                        trackEvent({
                             category: "Button",
                             action: "enr_salir_for_inicio_dni_frente",
                         });
                     } else if (optionProcess === "E") {
-                        ReactGA.event({
+                        trackEvent({
                             category: "Button",
                             action: "enr_salir_inicio_dni_frente",
                         });
@@ -26,7 +28,7 @@ export default function ButtonEmme({ step }) {
                 break;
             case validationStep.FRENTE_DNI:
                 {
-                    ReactGA.event({
+                    trackEvent({
                         category: "Button",
                         action: " enr_salir_captura_dni_frente",
                     });
@@ -34,7 +36,7 @@ export default function ButtonEmme({ step }) {
                 break;
             case validationStep.DORSO_DNI:
                 {
-                    ReactGA.event({
+                    trackEvent({
                         category: "Button",
                         action: "enr_salir_captura_dni_dorso",
                     });
@@ -42,7 +44,7 @@ export default function ButtonEmme({ step }) {
                 break;
             case validationStep.SELFIE:
                 {
-                    ReactGA.event({
+                    trackEvent({
                         category: "Button",
                         action: "enr_salir_inicio_selfie",
                     });

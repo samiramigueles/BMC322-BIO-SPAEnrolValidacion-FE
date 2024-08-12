@@ -1,4 +1,3 @@
-import Script from "next/script";
 import { GlobalProvider } from "../Context";
 import { ThemeProvider } from "@mui/material";
 import theme from "../theme";
@@ -14,11 +13,6 @@ export default function MyApp({ Component, pageProps }) {
     return (
         <GlobalProvider>
             <ThemeProvider theme={theme}>
-                <Script src="/Daon.FaceCapture.min.js" strategy="lazyOnload" />
-                <Script
-                    src="/Daon.DocumentCapture.min.js"
-                    strategy="lazyOnload"
-                />
                 <ProviderError>
                     <GoogleAnalitycs>
                         <Component {...pageProps} />

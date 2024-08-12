@@ -9,13 +9,14 @@ import { EndIcon, EmeIconButton } from "../../../public/assets";
 import classes from "./index.module.scss";
 import { useGlobalContext } from "../../Context";
 import BackToEme from "../../components/ButtonEme/BackToEme";
-import ReactGA from "react-ga4";
+import { trackEvent } from "utils/ga";
+
 function End({ sessionid }) {
     const { optionProcess } = useGlobalContext();
     useEffect(() => {
         const optionProcess = sessionStorage.getItem("optionProcess");
         if (optionProcess === "E" || optionProcess === "W") {
-            ReactGA.event({
+            trackEvent({
                 category: "Finalizacion",
                 action: "enr_operacion_exitosa",
                 value: `operation_id: ${sessionid}`,

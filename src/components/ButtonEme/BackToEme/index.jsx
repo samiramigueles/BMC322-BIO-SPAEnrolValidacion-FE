@@ -3,7 +3,7 @@ import classes from "./index.module.scss";
 import { Button, Box, Typography } from "@mui/material";
 import { ButtonLogo } from '../../../../public/assets';
 import Image from "next/image";
-import ReactGA from "react-ga4";
+import {  trackEvent } from "utils/ga";
 function BackToEme() {
     // function init() {
     //     window.open('', '_self', '');
@@ -13,7 +13,7 @@ function BackToEme() {
     //     init();
     // }, []);
     const handleButtonClick = () => {
-        ReactGA.event({
+        trackEvent({
             category: "Button",
             action: "enr_volver_chat"
         })

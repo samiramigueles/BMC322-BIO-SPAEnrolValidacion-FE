@@ -22,4 +22,7 @@ module.exports = withBundleAnalyzer({
 
         return config;
     },
+    compress: true,
+    reactStrictMode: true,
+    swcMinify: true,
 });

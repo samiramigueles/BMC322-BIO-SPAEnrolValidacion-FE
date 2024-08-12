@@ -86,6 +86,8 @@ export default function Home({ optionProcess, idxId, error }) {
         setIsMobile(isMobileDevice);
     }, []);
 
+    if (isMobile === null) return null;
+
     if (!isMobile) {
         return <ErrorOnlyMobile />;
     } else {

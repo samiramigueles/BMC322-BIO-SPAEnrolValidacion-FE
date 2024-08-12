@@ -9,11 +9,10 @@ import {
     CANVAS_DOCUMENT_NOT_FOUND,
     CANVAS_DOCUMENT_PASSED,
     ID_CARD_RATIO,
-    NUMERO_DE_PASOS_DE_LA_CAPTURA,
 } from "../../enums/document";
-import { FALSE } from "sass";
+
 import { Button } from "@mui/material";
-import ReactGA from "react-ga4";
+import { trackEvent } from "utils/ga";
 
 function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
     const videoRef = useRef(null);
@@ -175,7 +174,7 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
                             ...documentImages,
                             frontDni: documentImage,
                         };
-                        ReactGA.event({
+                        trackEvent({
                             category: "Captura",
                             action: "enr_captura_dni_frente",
                             value: timer,
@@ -186,7 +185,7 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
                             ...documentImages,
                             backDni: documentImage,
                         };
-                        ReactGA.event({
+                        trackEvent({
                             category: "Captura",
                             action: "enr_captura_dni_dorso",
                             value: timer,
@@ -217,7 +216,7 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
         console.log("Esto es timer", timer);
         if (timer >= 15) {
             console.log("Llego a 15");
-            ReactGA.event({
+            trackEvent({
                 category: "Reintento",
                 action: "enr_frente_reintentar",
                 value: timer,
@@ -252,7 +251,7 @@ function DocSdk({ step, setStep, setErrMsg, docSdkLicence }) {
     }, [cameraStarted, isWasmLoaded]);
 
     const handleClickTakeBackId = () => {
-        ReactGA.event({
+        trackEvent({
             category: "Button",
             action: "enr_inicio_dni_dorso",
             value: timer,

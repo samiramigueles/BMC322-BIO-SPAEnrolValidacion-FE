@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { subscribe, unsubscribe } from "utils/events/events";
 import dynamic from "next/dynamic";
-import ReactGA from "react-ga4";
+import { trackEvent } from "utils/ga";
 
 const LayoutErrorModal = dynamic(() => import("@components/LayoutErrorModal"), {
     ssr: false,
@@ -24,7 +24,7 @@ function ProviderError({ children }) {
         const handleErrorServer = (codeError) => {
             console.log("Esto es en provider error", codeError);
 
-            ReactGA.event({
+            trackEvent({
                 name: "error",
                 description:
                     operationProcess === "E" || operationProcess === "W"

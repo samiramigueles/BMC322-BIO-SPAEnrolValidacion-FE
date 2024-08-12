@@ -4,7 +4,10 @@ import { LoadingIntro } from "../../../public/assets/index";
 import classes from "./index.module.scss";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Script from "next/script";
+
 import { useGlobalContext } from "../../Context";
+
 function Intro() {
     const router = useRouter();
     const { setUIID, optionProcess } = useGlobalContext();
@@ -28,28 +31,32 @@ function Intro() {
     }, [optionProcess]);
 
     return (
-        <Grid
-            container
-            display={"flex"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            height={"100vh"}
-        >
+        <>
+            <Script src="/Daon.FaceCapture.min.js" strategy="lazyOnload" />
+            <Script src="/Daon.DocumentCapture.min.js" strategy="lazyOnload" />
             <Grid
-                item
+                container
                 display={"flex"}
-                xs={12}
                 justifyContent={"center"}
                 alignItems={"center"}
+                height={"100vh"}
             >
-                <Image
-                    src={LoadingIntro}
-                    alt="logo_macro"
-                    className={classes.img}
-                    unoptimized
-                />
+                <Grid
+                    item
+                    display={"flex"}
+                    xs={12}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                >
+                    <Image
+                        src={LoadingIntro}
+                        alt="logo_macro"
+                        className={classes.img}
+                        unoptimized
+                    />
+                </Grid>
             </Grid>
-        </Grid>
+        </>
     );
 }
 

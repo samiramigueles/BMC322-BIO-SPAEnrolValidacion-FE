@@ -1,22 +1,21 @@
 import React from "react";
 import Image from "next/image";
 import Layout from "../../components/Layout";
-
 import { Button, Typography, Grid } from "@mui/material";
 
 import { WelcomePresentation } from "../../../public/assets/index";
+import { trackEvent } from "utils/ga";
 
 import { validationStep } from "../../utils/validationSteps";
 
 import classes from "./index.module.scss";
-
 import { useGlobalContext } from "../../Context";
-import ReactGA from "react-ga4";
+
 function Welcome({ setStep, sessionid, step }) {
     const { optionProcess } = useGlobalContext();
     const handleClick = () => {
         if (optionProcess === "E") {
-            ReactGA.event({
+            trackEvent({
                 category: "Button",
                 action: "enr_inicio_dni_frente",
                 value: `operation_id: ${sessionid}`,

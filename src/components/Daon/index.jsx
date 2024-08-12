@@ -5,6 +5,7 @@ import { validationStep } from "../../utils/validationSteps";
 import { Box } from "@mui/material";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import ReactGA from "react-ga4";
+import { trackEvent } from "utils/ga";
 
 function DaonCapture({ setFeedbackMsg, setStep }) {
     const { setSelfie, idxID } = useGlobalContext();
@@ -68,12 +69,12 @@ function DaonCapture({ setFeedbackMsg, setStep }) {
                         const optionProcess =
                             sessionStorage.getItem("optionProcess");
                         if (optionProcess === "E" || optionProcess === "W") {
-                            ReactGA.event({
+                            trackEvent({
                                 category: "Captura",
                                 action: "enr_captura_selfie",
                             });
                         } else {
-                            ReactGA.event({
+                            trackEvent({
                                 category: "Captura",
                                 action: "val_captura_selfie",
                             });
