@@ -4,7 +4,7 @@ import { Grid, Typography, Button } from "@mui/material";
 
 import Layout from "../../components/Layout";
 
-import { EndIcon, EmeIconButton } from "../../../public/assets";
+import { EndIcon } from "../../../public/assets";
 
 import classes from "./index.module.scss";
 import { useGlobalContext } from "../../Context";
@@ -22,7 +22,7 @@ function End({ sessionid }) {
                 value: `operation_id: ${sessionid}`,
             });
         } else {
-            ReactGA.event({
+            trackEvent({
                 category: "Finalizacion",
                 action: "val_operacion_exitosa",
                 value: `operation_id: ${sessionid}`,

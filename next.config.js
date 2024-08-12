@@ -10,7 +10,7 @@ module.exports = withBundleAnalyzer({
                 headers: [
                     {
                         key: "Cache-Control",
-                        value: "max-age=31536000, immutable", // Cachear durante 1 año
+                        value: "max-age=31536000, immutable",
                     },
                 ],
             },
@@ -19,7 +19,7 @@ module.exports = withBundleAnalyzer({
                 headers: [
                     {
                         key: "Cache-Control",
-                        value: "max-age=31536000, immutable", // Cachear durante 1 año
+                        value: "max-age=31536000, immutable",
                     },
                 ],
             },
