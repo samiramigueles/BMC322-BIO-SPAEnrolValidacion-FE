@@ -4,7 +4,6 @@ import { useGlobalContext } from "../../Context";
 import { validationStep } from "../../utils/validationSteps";
 import { Box } from "@mui/material";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
-import ReactGA from "react-ga4";
 import { trackEvent } from "utils/ga";
 
 function DaonCapture({ setFeedbackMsg, setStep }) {

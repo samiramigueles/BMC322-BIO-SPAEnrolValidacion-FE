@@ -3,6 +3,28 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 module.exports = withBundleAnalyzer({
+    async headers() {
+        return [
+            {
+                source: "/Daon.FaceCapture.min.js",
+                headers: [
+                    {
+                        key: "Cache-Control",
+                        value: "max-age=31536000, immutable", // Cachear durante 1 año
+                    },
+                ],
+            },
+            {
+                source: "/Daon.DocumentCapture.min.js",
+                headers: [
+                    {
+                        key: "Cache-Control",
+                        value: "max-age=31536000, immutable", // Cachear durante 1 año
+                    },
+                ],
+            },
+        ];
+    },
     images: {
         remotePatterns: [
             {

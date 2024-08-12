@@ -1,6 +1,9 @@
 import Lottie from "lottie-react";
+import { Grid } from "@mui/material";
 
 import { LoadingValidated } from "../../../public/assets/index";
+
+import classes from "./index.module.scss";
 
 const LoadingAnimation = () => {
     return (

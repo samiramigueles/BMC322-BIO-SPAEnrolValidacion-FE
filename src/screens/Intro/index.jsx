@@ -32,8 +32,7 @@ function Intro() {
 
     return (
         <>
-            <Script src="/Daon.FaceCapture.min.js" strategy="lazyOnload" />
-            <Script src="/Daon.DocumentCapture.min.js" strategy="lazyOnload" />
+            
             <Grid
                 container
                 display={"flex"}

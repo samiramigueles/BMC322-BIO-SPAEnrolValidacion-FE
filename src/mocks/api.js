@@ -5,7 +5,7 @@ export default [
         response: {
             elements: [
                 {
-                    TipoIdSPA: "W",
+                    TipoIdSPA: "V",
                     Id: "0142898059M",
                 },
             ],
