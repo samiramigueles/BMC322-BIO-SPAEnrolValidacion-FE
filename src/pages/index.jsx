@@ -93,9 +93,6 @@ export default function Home({ optionProcess, idxId, error }) {
     } else {
         return (
             <div>
-                <Head>
-                    <title>Banco Chat</title>
-                </Head>
                 <Intro />
             </div>
         );

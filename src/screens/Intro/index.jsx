@@ -4,7 +4,6 @@ import { LoadingIntro } from "../../../public/assets/index";
 import classes from "./index.module.scss";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import Script from "next/script";
 
 import { useGlobalContext } from "../../Context";
 
