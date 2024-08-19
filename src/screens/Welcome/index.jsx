@@ -21,7 +21,7 @@ function Welcome({ setStep, sessionid, step }) {
                 value: `operation_id: ${sessionid}`,
             });
         } else if (optionProcess === "W") {
-            ReactGA.event({
+            trackEvent({
                 category: "Button",
                 action: "enr_for_inicio_dni_frente",
                 value: `operation_id: ${sessionid}`,

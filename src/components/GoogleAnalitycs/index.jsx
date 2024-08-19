@@ -10,7 +10,7 @@ const GoogleAnalitycs = ({ children }) => {
         inicializeGA();
         // Manejar cambios de ruta para realizar un seguimiento de las vistas de página
         const handleRouteChange = (url) => {
-            ReactGA.send({ hitType: "pageviw", path: url, title: url });
+            ReactGA.send({ hitType: "pageview", path: url, title: url });
         };
 
         router.events.on("routeChangeComplete", handleRouteChange);
